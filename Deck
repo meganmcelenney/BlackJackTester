@@ -1,0 +1,79 @@
+package blackjacktester;
+
+public class Deck 
+{
+    Card[] deck;
+    int[] used;
+    
+    //constructor
+    public Deck()
+    {
+        deck = new Card[52];
+        used = new int[52];
+        int val = 0;
+        int pt = 0;
+        int counter = 0; 
+        for(int i = 0; i < 4; i++)
+        {
+            char suit = ' ';
+            if( i == 0)
+            {
+                suit = 'd';
+            }
+            else if(i == 1)
+            {
+                suit = 'h';
+            }
+            else if(i == 2)
+            {
+                suit = 's';
+            }
+            else if(i == 3)
+            {
+                suit = 'c';
+            }
+               
+            for(int n = 2; n < 15; n++) 
+            {
+                pt = n;
+                if( n == 14)
+                    pt = 11;
+                else if(n > 10)
+                    pt = 10;
+
+                deck[counter++] = new Card(suit, n , pt);
+              
+            }
+        }
+    }
+    
+    public String toString()
+    {
+        String temp = "";
+        for(int i =0;i< deck.length;i++)
+        {
+            temp += deck[i].toString() + "\n";
+        }
+        return temp;
+    } 
+    
+    public void shuffle()
+    {
+        for(int i =0; i < 52; i++)
+        {
+            int rand = (int) (Math.random() * 51 + 1); 
+            Card tempCard = deck[rand];
+            deck[rand] = deck[i];
+            deck[i] = tempCard;
+        }
+    }
+    
+    public Card deal()
+    {
+        int count = 0;
+        while(used[count] > 0)
+            count++;
+        used[count] = 1;
+        return deck[count];       
+    }
+}
