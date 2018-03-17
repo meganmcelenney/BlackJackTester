@@ -1,0 +1,73 @@
+package blackjacktester;
+
+public class Card 
+{
+    private char suit;
+    private int value;
+    private int points;
+    
+    public Card(char suits, int val, int point)
+    {
+        setSuit(suits);
+        setValue(val);
+        setPoints(point);
+    }
+    //set methods
+    public void setSuit(char s)
+    {
+        suit = s;
+    }
+    public void setValue(int val)
+    {
+        value = val;
+    }
+    public void setPoints(int pt)
+    {
+        points = pt;
+    }
+    //get methods
+    public char getSuit()
+    {
+        return suit;
+    }
+    public int getValue()
+    {
+        return value;
+    }
+    public int getPoints()
+    {
+        return points;
+    }
+    public String toString() //need to make value a string
+    {
+        String str ="";
+        if(suit == 'd')
+        {
+            str = " of Diamonds";
+        }
+        else if(suit == 's')
+        {
+            str = " of Spades";
+        }
+        else if(suit == 'c')
+        {
+            str = " of Clubs";
+        }
+        else 
+        {
+            str = " of Hearts";
+        }
+        //check value
+        String val = "" + value;
+        if(value == 11)
+            val = "Jack";
+        if(value == 12)
+            val = "Queen";
+        if(value == 13)
+            val = "King";
+        if(value == 14)
+            val = "Ace";
+        
+        return val + str;
+    }
+}
