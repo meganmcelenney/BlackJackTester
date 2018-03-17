@@ -1,0 +1,86 @@
+/*
+Megan McElenney
+27 November 2017
+This code will execute a game of 21 aka Blackjack. There are only two people 
+playing: the player and the dealer.
+
+Test Data:
+I tested this code by running specific lines in the main method after creating 
+each method to ensure they worked. I then tested the data by playing the game 
+repeatedly and looking for flaws. I was confused on how to do the javadoc 
+comments.
+*/
+package blackjacktester;
+
+import javax.swing.JOptionPane;
+
+public class BlackJackTester 
+{
+    public static void main(String[] args) 
+    {
+        int playerScore = 0;
+        int dealerScore = 0;
+
+        Deck tempDeck = new Deck(); 
+        tempDeck.shuffle();
+        
+        Card dCard = tempDeck.deal();
+        System.out.println("Dealer's card: " + dCard.toString());
+        dealerScore += dCard.getPoints();
+        System.out.println("Dealer's score: " + dealerScore + "\n");
+        
+        Card pCard = tempDeck.deal();
+        System.out.println("Player's card: " + pCard.toString());
+        playerScore += pCard.getPoints();
+        System.out.println("Player's score: " + playerScore + "\n");
+        boolean done = true;
+        boolean card = true;
+        while(done == true && card == true && playerScore <= 21 && dealerScore 
+                <= 21)
+        {
+            if(dealerScore <= 17)
+            {
+                System.out.println("Dealer is taking another card");
+                dCard = tempDeck.deal();
+                System.out.println("Dealer's card: " + dCard.toString());
+                dealerScore += dCard.getPoints();
+                System.out.println("Dealer's score: " + dealerScore + "\n");
+            }
+            if(dealerScore == 21)
+                done = false;
+
+            String input = JOptionPane.showInputDialog("Would you like "
+                    + "another card? y/n");
+            if(input.equalsIgnoreCase("y"))
+            {
+                pCard = tempDeck.deal();
+                System.out.println("Player's card: " + pCard.toString());
+                playerScore += pCard.getPoints();
+                System.out.println("Player's score: " + playerScore + "\n");
+            }
+            else if(input.equalsIgnoreCase("n"))
+                card = false;
+            else
+                System.out.println("invalid");
+        }
+        if(playerScore > 21 && dealerScore > 21)
+            System.out.println("No winners.");
+        if(playerScore == 21)
+            System.out.println("Player wins!");
+        if(dealerScore == 21)
+            System.out.println("Dealer wins!");
+        else if(playerScore > 21 && dealerScore < 21)
+            System.out.println("The dealer wins.");
+        else if(dealerScore > 21 && playerScore < 21)
+            System.out.println("The player wins.");
+        else if(playerScore > dealerScore && playerScore != 21)
+            System.out.println("The player wins.");
+        else if(playerScore < dealerScore && dealerScore != 21)
+            System.out.println("The dealer wins.");
+        else if(playerScore == dealerScore)
+            System.out.println("Tie.");
+        
+        
+    }
+    
+}
